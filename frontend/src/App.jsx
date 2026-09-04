@@ -1,4 +1,5 @@
 import { useState } from "react";
+import AdminBookings from "./AdminBookings";
 import "./index.css";
 
 import ertigaImage from "./assets/cars/ertiga.png";
@@ -321,6 +322,10 @@ const tourPackages = [
 ========================================================= */
 
 function App() {
+
+  if (window.location.pathname === "/admin/bookings") {
+  return <AdminBookings />;
+}
 
  const [selectedDays, setSelectedDays] = useState(
   tourPackages.map(() => "weekday")
