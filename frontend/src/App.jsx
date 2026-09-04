@@ -610,7 +610,7 @@ I want to book a cab in Lonavala.`;
      BOOKING FORM WHATSAPP
   ======================================================= */
 
-  const submitBooking = () => {
+  const submitBooking = async () => {
   const {
     name,
     mobile,
@@ -642,7 +642,44 @@ I want to book a cab in Lonavala.`;
     return;
   }
 
-  let message = `🚕 *NEW CAB BOOKING*
+  // Prepare booking data for backend
+  const bookingData = {
+    name: name,
+    mobile: mobile,
+    date: date,
+    passengers: passengers,
+    pickup: pickup,
+    car: selectedPackageBooking
+      ? selectedPackageBooking.car
+      : car,
+    tour: selectedPackageBooking
+      ? selectedPackageBooking.name
+      : tour
+  };
+
+  try {
+    // Save booking to Spring Boot + MySQL
+    const response = await fetch(
+      "http://localhost:8081/api/bookings",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(bookingData)
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Booking could not be saved.");
+    }
+
+    const savedBooking = await response.json();
+
+    console.log("Booking saved successfully:", savedBooking);
+
+    // WhatsApp message
+    let message = `🚕 *NEW CAB BOOKING*
 
 👤 Name: ${name}
 📱 Mobile: ${mobile}
@@ -650,9 +687,9 @@ I want to book a cab in Lonavala.`;
 👥 Passengers: ${passengers}
 📍 Pickup Location: ${pickup}`;
 
-  // Package booking
-  if (selectedPackageBooking) {
-    message += `
+    // Package booking
+    if (selectedPackageBooking) {
+      message += `
 
 📦 *PACKAGE DETAILS*
 
@@ -661,27 +698,36 @@ Day: ${selectedPackageBooking.day}
 Car: ${selectedPackageBooking.car}
 💰 Price: ₹${selectedPackageBooking.price}
 ⏱️ Duration: ${selectedPackageBooking.hours}`;
-  } else {
-    // Normal/general booking
-    message += `
+    } else {
+      // Normal/general booking
+      message += `
 
 🚗 *CAB DETAILS*
 
 Car: ${car}
 Tour: ${tour}`;
-  }
+    }
 
-  message += `
+    message += `
 
 Hello Classic Tours And Travels,
 I would like to confirm this booking.
 
 Please confirm availability.`;
 
-  const whatsappUrl =
-    `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+    const whatsappUrl =
+      `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
 
-  window.open(whatsappUrl, "_blank");
+    // Open WhatsApp
+    window.open(whatsappUrl, "_blank");
+
+  } catch (error) {
+    console.error("Booking error:", error);
+
+    alert(
+      "Sorry, the booking could not be saved. Please make sure the backend server is running."
+    );
+  }
 };
 
 
