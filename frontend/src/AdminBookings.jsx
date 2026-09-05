@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 
 function AdminBookings() {
-  const [bookings, setBookings] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+const [bookings, setBookings] = useState([]);
+const [loading, setLoading] = useState(true);
+const [error, setError] = useState("");
+const [searchTerm, setSearchTerm] = useState("");
 
   const fetchBookings = async () => {
     try {
@@ -59,6 +60,18 @@ function AdminBookings() {
   const upcomingBookings = bookings.filter(
     (booking) => booking.date > today
   ).length;
+
+  const filteredBookings = bookings.filter((booking) => {
+  const search = searchTerm.toLowerCase();
+
+  return (
+    booking.name?.toLowerCase().includes(search) ||
+    booking.mobile?.toLowerCase().includes(search) ||
+    booking.pickup?.toLowerCase().includes(search) ||
+    booking.car?.toLowerCase().includes(search) ||
+    booking.tour?.toLowerCase().includes(search)
+  );
+});
 
   return (
     <div style={styles.container}>
@@ -159,27 +172,45 @@ function AdminBookings() {
 
 
           {/* Bookings Section */}
-          <div style={styles.sectionHeader}>
+          {/* Bookings Section */}
+<div style={styles.sectionHeader}>
 
-            <div>
-              <h2 style={styles.sectionTitle}>
-                All Bookings
-              </h2>
+  <div>
+    <h2 style={styles.sectionTitle}>
+      All Bookings
+    </h2>
 
-              <p style={styles.sectionSubtitle}>
-                Customer booking records
-              </p>
-            </div>
+    <p style={styles.sectionSubtitle}>
+      Customer booking records
+    </p>
+  </div>
 
-          </div>
+  <div style={styles.searchContainer}>
+
+    <span style={styles.searchIcon}>
+      🔍
+    </span>
+
+    <input
+      type="text"
+      placeholder="Search name, mobile, pickup, car..."
+      value={searchTerm}
+      onChange={(event) => setSearchTerm(event.target.value)}
+      style={styles.searchInput}
+    />
+
+  </div>
+
+</div>
 
 
           {/* No bookings */}
-          {bookings.length === 0 ? (
-
-            <div style={styles.empty}>
-              No bookings found.
-            </div>
+          {filteredBookings.length === 0 ? (
+  <div style={styles.empty}>
+    {bookings.length === 0
+      ? "No bookings found."
+      : "No bookings match your search."}
+  </div>
 
           ) : (
 
@@ -227,7 +258,7 @@ function AdminBookings() {
 
                 <tbody>
 
-                  {bookings.map((booking) => (
+                  {filteredBookings.map((booking) => (
 
                     <tr key={booking.id}>
 
@@ -396,6 +427,29 @@ const styles = {
     whiteSpace: "nowrap"
   },
 
+searchContainer: {
+  display: "flex",
+  alignItems: "center",
+  backgroundColor: "#ffffff",
+  border: "1px solid #ddd",
+  borderRadius: "8px",
+  padding: "0 12px",
+  width: "350px"
+},
+
+searchIcon: {
+  fontSize: "18px",
+  marginRight: "8px"
+},
+
+searchInput: {
+  width: "100%",
+  border: "none",
+  outline: "none",
+  padding: "12px 5px",
+  fontSize: "14px"
+},
+  
   message: {
     padding: "30px",
     textAlign: "center"
