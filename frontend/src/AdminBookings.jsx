@@ -5,6 +5,7 @@ const [bookings, setBookings] = useState([]);
 const [loading, setLoading] = useState(true);
 const [error, setError] = useState("");
 const [searchTerm, setSearchTerm] = useState("");
+const [selectedDate, setSelectedDate] = useState("");
 
   const fetchBookings = async () => {
     try {
@@ -64,13 +65,17 @@ const [searchTerm, setSearchTerm] = useState("");
   const filteredBookings = bookings.filter((booking) => {
   const search = searchTerm.toLowerCase();
 
-  return (
+  const matchesSearch =
     booking.name?.toLowerCase().includes(search) ||
     booking.mobile?.toLowerCase().includes(search) ||
     booking.pickup?.toLowerCase().includes(search) ||
     booking.car?.toLowerCase().includes(search) ||
-    booking.tour?.toLowerCase().includes(search)
-  );
+    booking.tour?.toLowerCase().includes(search);
+
+  const matchesDate =
+    !selectedDate || booking.date === selectedDate;
+
+  return matchesSearch && matchesDate;
 });
 
   return (
@@ -201,6 +206,30 @@ const [searchTerm, setSearchTerm] = useState("");
 
   </div>
 
+  <div style={styles.dateContainer}>
+
+  <span style={styles.dateLabel}>
+    📅
+  </span>
+
+  <input
+    type="date"
+    value={selectedDate}
+    onChange={(event) => setSelectedDate(event.target.value)}
+    style={styles.dateInput}
+  />
+
+  {selectedDate && (
+    <button
+      onClick={() => setSelectedDate("")}
+      style={styles.clearButton}
+    >
+      ✕
+    </button>
+  )}
+
+</div>
+
 </div>
 
 
@@ -315,6 +344,8 @@ const [searchTerm, setSearchTerm] = useState("");
 
 
 const styles = {
+
+  
 
   container: {
     minHeight: "100vh",
@@ -468,6 +499,8 @@ searchInput: {
     backgroundColor: "#ffffff",
     borderRadius: "12px"
   }
+
+  
 
 };
 
