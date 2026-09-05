@@ -6,6 +6,16 @@ const [loading, setLoading] = useState(true);
 const [error, setError] = useState("");
 const [searchTerm, setSearchTerm] = useState("");
 const [selectedDate, setSelectedDate] = useState("");
+const [editingBooking, setEditingBooking] = useState(null);
+const [editForm, setEditForm] = useState({
+  name: "",
+  mobile: "",
+  date: "",
+  passengers: "",
+  pickup: "",
+  car: "",
+  tour: ""
+});
 
   const fetchBookings = async () => {
     try {
@@ -77,6 +87,57 @@ const [selectedDate, setSelectedDate] = useState("");
 
   return matchesSearch && matchesDate;
 });
+
+const handleEdit = (booking) => {
+  setEditingBooking(booking);
+
+  setEditForm({
+    name: booking.name || "",
+    mobile: booking.mobile || "",
+    date: booking.date || "",
+    passengers: booking.passengers || "",
+    pickup: booking.pickup || "",
+    car: booking.car || "",
+    tour: booking.tour || ""
+  });
+};
+
+const handleUpdate = async () => {
+  try {
+    const response = await fetch(
+      `http://localhost:8081/api/bookings/${editingBooking.id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(editForm)
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to update booking.");
+    }
+
+    const updatedBooking = await response.json();
+
+    setBookings((previous) =>
+      previous.map((booking) =>
+        booking.id === updatedBooking.id
+          ? updatedBooking
+          : booking
+      )
+    );
+
+    setEditingBooking(null);
+
+    alert("Booking updated successfully.");
+  } catch (error) {
+    console.error("Update error:", error);
+
+    alert("Unable to update booking.");
+  }
+};
 
 const handleDelete = async (id) => {
   const confirmed = window.confirm(
@@ -266,8 +327,132 @@ const handleDelete = async (id) => {
 </div>
 
 
-          {/* No bookings */}
-          {filteredBookings.length === 0 ? (
+{/* Edit Booking Form */}
+{editingBooking && (
+  <div style={styles.editContainer}>
+
+    <h2 style={styles.editTitle}>
+      Edit Booking #{editingBooking.id}
+    </h2>
+
+    <div style={styles.editGrid}>
+
+      <input
+        type="text"
+        placeholder="Name"
+        value={editForm.name}
+        onChange={(event) =>
+          setEditForm({
+            ...editForm,
+            name: event.target.value
+          })
+        }
+        style={styles.editInput}
+      />
+
+      <input
+        type="text"
+        placeholder="Mobile"
+        value={editForm.mobile}
+        onChange={(event) =>
+          setEditForm({
+            ...editForm,
+            mobile: event.target.value
+          })
+        }
+        style={styles.editInput}
+      />
+
+      <input
+        type="date"
+        value={editForm.date}
+        onChange={(event) =>
+          setEditForm({
+            ...editForm,
+            date: event.target.value
+          })
+        }
+        style={styles.editInput}
+      />
+
+      <input
+        type="text"
+        placeholder="Passengers"
+        value={editForm.passengers}
+        onChange={(event) =>
+          setEditForm({
+            ...editForm,
+            passengers: event.target.value
+          })
+        }
+        style={styles.editInput}
+      />
+
+      <input
+        type="text"
+        placeholder="Pickup Location"
+        value={editForm.pickup}
+        onChange={(event) =>
+          setEditForm({
+            ...editForm,
+            pickup: event.target.value
+          })
+        }
+        style={styles.editInput}
+      />
+
+      <input
+        type="text"
+        placeholder="Car"
+        value={editForm.car}
+        onChange={(event) =>
+          setEditForm({
+            ...editForm,
+            car: event.target.value
+          })
+        }
+        style={styles.editInput}
+      />
+
+      <input
+        type="text"
+        placeholder="Tour"
+        value={editForm.tour}
+        onChange={(event) =>
+          setEditForm({
+            ...editForm,
+            tour: event.target.value
+          })
+        }
+        style={styles.editInput}
+      />
+
+    </div>
+
+    <div style={styles.editButtons}>
+
+      <button
+        onClick={() => setEditingBooking(null)}
+        style={styles.cancelButton}
+      >
+        Cancel
+      </button>
+
+      <button
+        onClick={() => handleUpdate()}
+        style={styles.saveButton}
+      >
+        Save Changes
+      </button>
+
+    </div>
+
+  </div>
+)}
+
+
+{/* No bookings */}
+{filteredBookings.length === 0 ? (
   <div style={styles.empty}>
     {bookings.length === 0
       ? "No bookings found."
@@ -360,11 +545,18 @@ const handleDelete = async (id) => {
 
                       <td style={styles.td}>
     <button
-    onClick={() => handleDelete(booking.id)}
-    style={styles.deleteButton}
-  >
-    Delete
-  </button>
+  onClick={() => handleEdit(booking)}
+  style={styles.editButton}
+>
+  Edit
+</button>
+
+<button
+  onClick={() => handleDelete(booking.id)}
+  style={styles.deleteButton}
+>
+  Delete
+</button>
 </td>
 
                     </tr>
@@ -542,7 +734,57 @@ searchInput: {
     textAlign: "center",
     backgroundColor: "#ffffff",
     borderRadius: "12px"
-  }
+  },
+
+  editContainer: {
+  backgroundColor: "#ffffff",
+  padding: "20px",
+  borderRadius: "10px",
+  marginBottom: "20px",
+  boxShadow: "0 2px 8px rgba(0,0,0,0.08)"
+},
+
+editTitle: {
+  marginTop: 0,
+  marginBottom: "20px"
+},
+
+editGrid: {
+  display: "grid",
+  gridTemplateColumns: "repeat(2, 1fr)",
+  gap: "15px"
+},
+
+editInput: {
+  padding: "10px",
+  border: "1px solid #ccc",
+  borderRadius: "6px",
+  fontSize: "14px"
+},
+
+editButtons: {
+  marginTop: "20px",
+  display: "flex",
+  gap: "10px"
+},
+
+cancelButton: {
+  padding: "10px 18px",
+  border: "none",
+  borderRadius: "6px",
+  backgroundColor: "#777",
+  color: "#fff",
+  cursor: "pointer"
+},
+
+saveButton: {
+  padding: "10px 18px",
+  border: "none",
+  borderRadius: "6px",
+  backgroundColor: "#198754",
+  color: "#fff",
+  cursor: "pointer"
+}
 
   
 

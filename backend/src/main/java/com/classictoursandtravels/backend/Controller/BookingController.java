@@ -33,4 +33,22 @@ public class BookingController {
 public void deleteBooking(@PathVariable Long id) {
     bookingRepository.deleteById(id);
 }
+@PutMapping("/{id}")
+public Booking updateBooking(
+        @PathVariable Long id,
+        @RequestBody Booking updatedBooking) {
+
+    Booking existingBooking =
+            bookingRepository.findById(id).orElseThrow();
+
+    existingBooking.setName(updatedBooking.getName());
+    existingBooking.setMobile(updatedBooking.getMobile());
+    existingBooking.setDate(updatedBooking.getDate());
+    existingBooking.setPassengers(updatedBooking.getPassengers());
+    existingBooking.setPickup(updatedBooking.getPickup());
+    existingBooking.setCar(updatedBooking.getCar());
+    existingBooking.setTour(updatedBooking.getTour());
+
+    return bookingRepository.save(existingBooking);
+}
 }
