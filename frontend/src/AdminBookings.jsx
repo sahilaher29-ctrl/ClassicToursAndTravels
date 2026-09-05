@@ -78,6 +78,39 @@ const [selectedDate, setSelectedDate] = useState("");
   return matchesSearch && matchesDate;
 });
 
+const handleDelete = async (id) => {
+  const confirmed = window.confirm(
+    "Are you sure you want to delete this booking?"
+  );
+
+  if (!confirmed) {
+    return;
+  }
+
+  try {
+    const response = await fetch(
+      `http://localhost:8081/api/bookings/${id}`,
+      {
+        method: "DELETE"
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to delete booking.");
+    }
+
+    setBookings((previous) =>
+      previous.filter((booking) => booking.id !== id)
+    );
+
+    alert("Booking deleted successfully.");
+  } catch (error) {
+    console.error("Delete error:", error);
+
+    alert("Unable to delete booking.");
+  }
+};
+
   return (
     <div style={styles.container}>
 
@@ -282,6 +315,8 @@ const [selectedDate, setSelectedDate] = useState("");
                       Tour
                     </th>
 
+                    <th style={styles.th}>Action</th>
+
                   </tr>
                 </thead>
 
@@ -322,6 +357,15 @@ const [selectedDate, setSelectedDate] = useState("");
                       <td style={styles.td}>
                         {booking.tour}
                       </td>
+
+                      <td style={styles.td}>
+    <button
+    onClick={() => handleDelete(booking.id)}
+    style={styles.deleteButton}
+  >
+    Delete
+  </button>
+</td>
 
                     </tr>
 
