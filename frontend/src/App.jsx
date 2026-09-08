@@ -1,5 +1,6 @@
 import { useState } from "react";
 import AdminBookings from "./AdminBookings";
+import AdminLogin from "./AdminLogin";
 import "./index.css";
 
 import ertigaImage from "./assets/cars/ertiga.png";
@@ -322,8 +323,20 @@ const tourPackages = [
 ========================================================= */
 
 function App() {
+  if (window.location.pathname === "/admin/login") {
+  return <AdminLogin />;
+} 
 
   if (window.location.pathname === "/admin/bookings") {
+
+  const isAdminLoggedIn =
+    localStorage.getItem("adminLoggedIn") === "true";
+
+  if (!isAdminLoggedIn) {
+    window.location.href = "/admin/login";
+    return null;
+  }
+
   return <AdminBookings />;
 }
 
