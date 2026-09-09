@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 
 function AdminBookings() {
+const handleLogout = () => {
+  localStorage.removeItem("adminLoggedIn");
+  window.location.href = "/admin/login";
+};
 const [bookings, setBookings] = useState([]);
 const [loading, setLoading] = useState(true);
 const [error, setError] = useState("");
@@ -182,6 +186,21 @@ const handleDelete = async (id) => {
           <h1 style={styles.title}>
             Admin Dashboard
           </h1>
+
+          <button
+  onClick={handleLogout}
+  style={{
+    padding: "10px 18px",
+    border: "none",
+    borderRadius: "6px",
+    backgroundColor: "#dc3545",
+    color: "#ffffff",
+    cursor: "pointer",
+    marginTop: "10px"
+  }}
+>
+  🚪 Logout
+</button>
 
           <p style={styles.subtitle}>
             Classic Tours And Travels
