@@ -18,7 +18,8 @@ const [editForm, setEditForm] = useState({
   passengers: "",
   pickup: "",
   car: "",
-  tour: ""
+  tour: "",
+  status: "Pending"
 });
 
   const fetchBookings = async () => {
@@ -102,7 +103,8 @@ const handleEdit = (booking) => {
     passengers: booking.passengers || "",
     pickup: booking.pickup || "",
     car: booking.car || "",
-    tour: booking.tour || ""
+    tour: booking.tour || "",
+    status: booking.status || "Pending"
   });
 };
 
@@ -445,6 +447,21 @@ const handleDelete = async (id) => {
         }
         style={styles.editInput}
       />
+      <select
+  value={editForm.status}
+  onChange={(event) =>
+    setEditForm({
+      ...editForm,
+      status: event.target.value
+    })
+  }
+  style={styles.editInput}
+>
+  <option value="Pending">🟡 Pending</option>
+  <option value="Confirmed">🟢 Confirmed</option>
+  <option value="Completed">🔵 Completed</option>
+  <option value="Cancelled">🔴 Cancelled</option>
+</select>
 
     </div>
 
@@ -519,6 +536,10 @@ const handleDelete = async (id) => {
                       Tour
                     </th>
 
+                    <th style={styles.th}>
+                      Status
+                    </th>
+
                     <th style={styles.th}>Action</th>
 
                   </tr>
@@ -554,15 +575,15 @@ const handleDelete = async (id) => {
                         {booking.pickup}
                       </td>
 
-                      <td style={styles.td}>
-                        {booking.car}
-                      </td>
+                      <td style={styles.td}>{booking.car}</td>
+
+                      <td style={styles.td}>{booking.tour}</td>
 
                       <td style={styles.td}>
-                        {booking.tour}
-                      </td>
+                         {booking.status || "Pending"}
+</td>
 
-                      <td style={styles.td}>
+<td style={styles.td}>
     <button
   onClick={() => handleEdit(booking)}
   style={styles.editButton}

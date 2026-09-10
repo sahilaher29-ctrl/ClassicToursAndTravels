@@ -21,8 +21,11 @@ public class BookingController {
 
     @PostMapping
     public Booking createBooking(@RequestBody Booking booking) {
-        return bookingRepository.save(booking);
-    }
+
+    booking.setStatus("Pending");
+
+    return bookingRepository.save(booking);
+}
 
     @GetMapping
     public List<Booking> getAllBookings() {
@@ -48,6 +51,7 @@ public Booking updateBooking(
     existingBooking.setPickup(updatedBooking.getPickup());
     existingBooking.setCar(updatedBooking.getCar());
     existingBooking.setTour(updatedBooking.getTour());
+    existingBooking.setStatus(updatedBooking.getStatus());
 
     return bookingRepository.save(existingBooking);
 }

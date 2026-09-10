@@ -24,6 +24,8 @@ public class Booking {
 
     private String tour;
 
+    private String status;
+
     public Booking() {
     }
 
@@ -86,4 +88,12 @@ public class Booking {
     public void setTour(String tour) {
         this.tour = tour;
     }
+
+    public String getStatus() {
+    return status;
+}
+
+    public void setStatus(String status) {
+    this.status = status;
+}
 }
