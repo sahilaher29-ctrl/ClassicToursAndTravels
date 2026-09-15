@@ -11,6 +11,7 @@ const [error, setError] = useState("");
 const [selectedBooking, setSelectedBooking] = useState(null);
 const [searchTerm, setSearchTerm] = useState("");
 const [selectedDate, setSelectedDate] = useState("");
+const [sortOrder, setSortOrder] = useState("upcoming");
 const [editingBooking, setEditingBooking] = useState(null);
 const [editForm, setEditForm] = useState({
   name: "",
@@ -78,21 +79,33 @@ const [editForm, setEditForm] = useState({
     (booking) => booking.date > today
   ).length;
 
-  const filteredBookings = bookings.filter((booking) => {
-  const search = searchTerm.toLowerCase();
+ const filteredBookings = bookings
+  .filter((booking) => {
+    const search = searchTerm.toLowerCase();
 
-  const matchesSearch =
-    booking.name?.toLowerCase().includes(search) ||
-    booking.mobile?.toLowerCase().includes(search) ||
-    booking.pickup?.toLowerCase().includes(search) ||
-    booking.car?.toLowerCase().includes(search) ||
-    booking.tour?.toLowerCase().includes(search);
+    const matchesSearch =
+      booking.name?.toLowerCase().includes(search) ||
+      booking.mobile?.toLowerCase().includes(search) ||
+      booking.pickup?.toLowerCase().includes(search) ||
+      booking.car?.toLowerCase().includes(search) ||
+      booking.tour?.toLowerCase().includes(search);
 
-  const matchesDate =
-    !selectedDate || booking.date === selectedDate;
+    const matchesDate =
+      !selectedDate || booking.date === selectedDate;
 
-  return matchesSearch && matchesDate;
-});
+    return matchesSearch && matchesDate;
+  })
+  .sort((a, b) => {
+
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
+
+    if (sortOrder === "upcoming") {
+      return dateA - dateB;
+    }
+
+    return dateB - dateA;
+  });
 
 const handleView = (booking) => {
   setSelectedBooking(booking);
@@ -438,6 +451,28 @@ const handleDelete = async (id) => {
   </div>
 
   <div style={styles.dateContainer}>
+
+  <div style={styles.sortContainer}>
+
+  <span style={styles.sortLabel}>
+    ↕️ Sort:
+  </span>
+
+  <select
+    value={sortOrder}
+    onChange={(event) => setSortOrder(event.target.value)}
+    style={styles.sortSelect}
+  >
+    <option value="upcoming">
+      Upcoming First
+    </option>
+
+    <option value="latest">
+      Latest First
+    </option>
+  </select>
+
+</div>  
 
   <span style={styles.dateLabel}>
     📅
@@ -1030,6 +1065,26 @@ detailsGrid: {
   display: "grid",
   gridTemplateColumns: "repeat(3, 1fr)",
   gap: "18px"
+},
+
+sortContainer: {
+  display: "flex",
+  alignItems: "center",
+  gap: "8px"
+},
+
+sortLabel: {
+  fontSize: "14px",
+  fontWeight: "600"
+},
+
+sortSelect: {
+  padding: "10px",
+  border: "1px solid #ccc",
+  borderRadius: "6px",
+  fontSize: "14px",
+  backgroundColor: "#ffffff",
+  cursor: "pointer"
 },
 
   
