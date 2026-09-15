@@ -602,26 +602,25 @@ I want to book a cab in Lonavala.`;
      BOOKING FORM CHANGE
   ======================================================= */
 
-  const handleBookingChange = (
-    event
-  ) => {
+  const handleBookingChange = (event) => {
+  const { name, value } = event.target;
 
-    const {
-      name,
-      value
-    } = event.target;
+  if (name === "mobile") {
+    const numbersOnly = value.replace(/\D/g, "");
 
-    setBookingForm(
-      (previous) => ({
+    setBookingForm((previous) => ({
+      ...previous,
+      [name]: numbersOnly
+    }));
 
-        ...previous,
+    return;
+  }
 
-        [name]: value
-
-      })
-    );
-
-  };
+  setBookingForm((previous) => ({
+    ...previous,
+    [name]: value
+  }));
+};
 
 
   /* =======================================================
@@ -650,10 +649,28 @@ I want to book a cab in Lonavala.`;
     return;
   }
 
+  if (mobile.length !== 10) {
+
+  alert("Please enter a valid 10-digit mobile number.");
+
+  return;
+
+}
+
   if (!date) {
     alert("Please select your travel date.");
     return;
   }
+
+  const today = new Date().toISOString().split("T")[0];
+
+  if (date < today) {
+
+  alert("Please select today or a future travel date.");
+
+  return;
+
+}
 
   if (!pickup.trim()) {
     alert("Please enter your pickup location.");
@@ -1932,11 +1949,13 @@ Please confirm availability.`;
                 </label>
 
                 <input
-                  type="tel"
-                  name="mobile"
-                  value={bookingForm.mobile}
-                  onChange={handleBookingChange}
-                  placeholder="Enter mobile number"
+                type="tel"
+                name="mobile"
+                value={bookingForm.mobile}
+                onChange={handleBookingChange}
+                maxLength="10"
+                inputMode="numeric"
+                placeholder="Enter 10-digit mobile number"
                 />
 
               </div>
@@ -1959,6 +1978,7 @@ Please confirm availability.`;
                   name="date"
                   value={bookingForm.date}
                   onChange={handleBookingChange}
+                  min={new Date().toISOString().split("T")[0]}
                 />
 
               </div>
