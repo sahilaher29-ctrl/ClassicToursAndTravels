@@ -163,6 +163,64 @@ const handleUpdate = async () => {
   }
 };
 
+const handleExportCSV = () => {
+  if (bookings.length === 0) {
+    alert("No bookings available to export.");
+    return;
+  }
+
+  const headers = [
+    "Booking ID",
+    "Customer Name",
+    "Mobile",
+    "Travel Date",
+    "Passengers",
+    "Pickup Location",
+    "Car",
+    "Tour",
+    "Status"
+  ];
+
+  const rows = bookings.map((booking) => [
+    booking.id,
+    booking.name,
+    booking.mobile ? `="${booking.mobile}"` : "",
+    booking.date,
+    booking.passengers,
+    booking.pickup,
+    booking.car,
+    booking.tour,
+    booking.status || "Pending"
+  ]);
+
+  const csvContent = [
+    headers,
+    ...rows
+  ]
+    .map((row) =>
+      row
+        .map((value) => `"${String(value ?? "").replace(/"/g, '""')}"`)
+        .join(",")
+    )
+    .join("\n");
+
+  const blob = new Blob([csvContent], {
+    type: "text/csv;charset=utf-8;"
+  });
+
+  const url = URL.createObjectURL(blob);
+
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "classic-tours-bookings.csv";
+
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  URL.revokeObjectURL(url);
+};
+
 const handleDelete = async (id) => {
   const confirmed = window.confirm(
     "Are you sure you want to delete this booking?"
@@ -344,6 +402,23 @@ const handleDelete = async (id) => {
         >
           🔄 Refresh
         </button>
+
+      <button
+  onClick={handleExportCSV}
+  style={{
+    padding: "10px 16px",
+    border: "none",
+    borderRadius: "6px",
+    backgroundColor: "#198754",
+    color: "#ffffff",
+    cursor: "pointer",
+    fontSize: "14px",
+    fontWeight: "600",
+    marginLeft: "10px"
+  }}
+>
+  📥 Export CSV
+</button>  
 
       </div>
 
