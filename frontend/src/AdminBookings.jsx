@@ -584,19 +584,57 @@ const handleDelete = async (id) => {
 </td>
 
 <td style={styles.td}>
-    <button
-  onClick={() => handleEdit(booking)}
-  style={styles.editButton}
->
-  Edit
-</button>
 
-<button
-  onClick={() => handleDelete(booking.id)}
-  style={styles.deleteButton}
->
-  Delete
-</button>
+  <a
+    href={`tel:${booking.mobile}`}
+    style={{
+      display: "inline-block",
+      padding: "8px 12px",
+      marginRight: "6px",
+      borderRadius: "6px",
+      backgroundColor: "#198754",
+      color: "#ffffff",
+      textDecoration: "none",
+      fontSize: "13px"
+    }}
+  >
+    📞 Call
+  </a>
+
+  <a
+    href={`https://wa.me/91${booking.mobile}?text=${encodeURIComponent(
+      `Hello ${booking.name}, this is Classic Tours And Travels regarding your booking for ${booking.date}.`
+    )}`}
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{
+      display: "inline-block",
+      padding: "8px 12px",
+      marginRight: "6px",
+      borderRadius: "6px",
+      backgroundColor: "#25D366",
+      color: "#ffffff",
+      textDecoration: "none",
+      fontSize: "13px"
+    }}
+  >
+    💬 WhatsApp
+  </a>
+
+  <button
+    onClick={() => handleEdit(booking)}
+    style={styles.editButton}
+  >
+    Edit
+  </button>
+
+  <button
+    onClick={() => handleDelete(booking.id)}
+    style={styles.deleteButton}
+  >
+    Delete
+  </button>
+
 </td>
 
                     </tr>
