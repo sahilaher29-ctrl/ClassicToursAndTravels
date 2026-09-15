@@ -8,6 +8,7 @@ const handleLogout = () => {
 const [bookings, setBookings] = useState([]);
 const [loading, setLoading] = useState(true);
 const [error, setError] = useState("");
+const [selectedBooking, setSelectedBooking] = useState(null);
 const [searchTerm, setSearchTerm] = useState("");
 const [selectedDate, setSelectedDate] = useState("");
 const [editingBooking, setEditingBooking] = useState(null);
@@ -92,6 +93,10 @@ const [editForm, setEditForm] = useState({
 
   return matchesSearch && matchesDate;
 });
+
+const handleView = (booking) => {
+  setSelectedBooking(booking);
+};
 
 const handleEdit = (booking) => {
   setEditingBooking(booking);
@@ -180,6 +185,74 @@ const handleDelete = async (id) => {
 
   return (
     <div style={styles.container}>
+
+    {selectedBooking && (
+  <div style={styles.detailsContainer}>
+
+    <div style={styles.detailsHeader}>
+      <h2 style={styles.detailsTitle}>
+        👁️ Booking Details
+      </h2>
+
+      <button
+        onClick={() => setSelectedBooking(null)}
+        style={styles.closeDetailsButton}
+      >
+        ✕ Close
+      </button>
+    </div>
+
+    <div style={styles.detailsGrid}>
+
+      <div>
+        <strong>Booking ID:</strong>
+        <p>{selectedBooking.id}</p>
+      </div>
+
+      <div>
+        <strong>Customer Name:</strong>
+        <p>{selectedBooking.name}</p>
+      </div>
+
+      <div>
+        <strong>Mobile:</strong>
+        <p>{selectedBooking.mobile}</p>
+      </div>
+
+      <div>
+        <strong>Travel Date:</strong>
+        <p>{selectedBooking.date}</p>
+      </div>
+
+      <div>
+        <strong>Passengers:</strong>
+        <p>{selectedBooking.passengers}</p>
+      </div>
+
+      <div>
+        <strong>Pickup Location:</strong>
+        <p>{selectedBooking.pickup}</p>
+      </div>
+
+      <div>
+        <strong>Car:</strong>
+        <p>{selectedBooking.car}</p>
+      </div>
+
+      <div>
+        <strong>Tour:</strong>
+        <p>{selectedBooking.tour}</p>
+      </div>
+
+      <div>
+        <strong>Status:</strong>
+        <p>{selectedBooking.status || "Pending"}</p>
+      </div>
+
+    </div>
+
+  </div>
+)}
 
       {/* Header */}
       <div style={styles.header}>
@@ -585,6 +658,23 @@ const handleDelete = async (id) => {
 
 <td style={styles.td}>
 
+ <button
+    onClick={() => handleView(booking)}
+    style={{
+      padding: "8px 12px",
+      marginRight: "6px",
+      marginBottom: "6px",
+      border: "none",
+      borderRadius: "6px",
+      backgroundColor: "#0d6efd",
+      color: "#ffffff",
+      cursor: "pointer",
+      fontSize: "13px"
+    }}
+  >
+    👁️ View
+  </button>
+
   <a
     href={`tel:${booking.mobile}`}
     style={{
@@ -862,7 +952,42 @@ saveButton: {
   backgroundColor: "#198754",
   color: "#fff",
   cursor: "pointer"
-}
+},
+
+detailsContainer: {
+  backgroundColor: "#ffffff",
+  padding: "20px",
+  borderRadius: "10px",
+  marginBottom: "20px",
+  boxShadow: "0 2px 8px rgba(0,0,0,0.08)"
+},
+
+detailsHeader: {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  marginBottom: "20px"
+},
+
+detailsTitle: {
+  margin: 0
+},
+
+closeDetailsButton: {
+  padding: "8px 14px",
+  border: "none",
+  borderRadius: "6px",
+  backgroundColor: "#6c757d",
+  color: "#ffffff",
+  cursor: "pointer",
+  fontSize: "14px"
+},
+
+detailsGrid: {
+  display: "grid",
+  gridTemplateColumns: "repeat(3, 1fr)",
+  gap: "18px"
+},
 
   
 
