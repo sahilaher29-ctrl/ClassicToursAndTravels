@@ -249,6 +249,49 @@ const handleDelete = async (id) => {
         <p>{selectedBooking.status || "Pending"}</p>
       </div>
 
+      <div>
+  <strong>Customer Contact:</strong>
+
+  <div style={{ marginTop: "8px" }}>
+
+    <a
+      href={`tel:${selectedBooking.mobile}`}
+      style={{
+        display: "inline-block",
+        padding: "8px 12px",
+        marginRight: "8px",
+        borderRadius: "6px",
+        backgroundColor: "#198754",
+        color: "#ffffff",
+        textDecoration: "none",
+        fontSize: "13px"
+      }}
+    >
+      📞 Call
+    </a>
+
+    <a
+      href={`https://wa.me/91${selectedBooking.mobile}?text=${encodeURIComponent(
+        `Hello ${selectedBooking.name}, this is Classic Tours And Travels regarding your booking for ${selectedBooking.date}.`
+      )}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{
+        display: "inline-block",
+        padding: "8px 12px",
+        borderRadius: "6px",
+        backgroundColor: "#25D366",
+        color: "#ffffff",
+        textDecoration: "none",
+        fontSize: "13px"
+      }}
+    >
+      💬 WhatsApp
+    </a>
+
+  </div>
+</div>
+
     </div>
 
   </div>
