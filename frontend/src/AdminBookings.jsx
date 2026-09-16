@@ -276,6 +276,11 @@ const handleDelete = async (id) => {
     <div style={styles.detailsGrid}>
 
       <div>
+      <strong>Booking Reference:</strong>
+      <p>{selectedBooking.bookingReference || "—"}</p>
+      </div>
+
+      <div>
         <strong>Booking ID:</strong>
         <p>{selectedBooking.id}</p>
       </div>
@@ -728,48 +733,54 @@ const handleDelete = async (id) => {
               <table style={styles.table}>
 
                 <thead>
-                  <tr>
+  <tr>
 
-                    <th style={styles.th}>
-                      ID
-                    </th>
+    <th style={styles.th}>
+      Booking Ref
+    </th>
 
-                    <th style={styles.th}>
-                      Name
-                    </th>
+    <th style={styles.th}>
+      ID
+    </th>
 
-                    <th style={styles.th}>
-                      Mobile
-                    </th>
+    <th style={styles.th}>
+      Name
+    </th>
 
-                    <th style={styles.th}>
-                      Date
-                    </th>
+    <th style={styles.th}>
+      Mobile
+    </th>
 
-                    <th style={styles.th}>
-                      Passengers
-                    </th>
+    <th style={styles.th}>
+      Date
+    </th>
 
-                    <th style={styles.th}>
-                      Pickup
-                    </th>
+    <th style={styles.th}>
+      Passengers
+    </th>
 
-                    <th style={styles.th}>
-                      Car
-                    </th>
+    <th style={styles.th}>
+      Pickup
+    </th>
 
-                    <th style={styles.th}>
-                      Tour
-                    </th>
+    <th style={styles.th}>
+      Car
+    </th>
 
-                    <th style={styles.th}>
-                      Status
-                    </th>
+    <th style={styles.th}>
+      Tour
+    </th>
 
-                    <th style={styles.th}>Action</th>
+    <th style={styles.th}>
+      Status
+    </th>
 
-                  </tr>
-                </thead>
+    <th style={styles.th}>
+      Action
+    </th>
+
+  </tr>
+</thead>
 
                 <tbody>
 
@@ -778,8 +789,12 @@ const handleDelete = async (id) => {
                     <tr key={booking.id}>
 
                       <td style={styles.td}>
+                  {booking.bookingReference || "—"}
+                    </td>
+
+                      <td style={styles.td}>
                         {booking.id}
-                      </td>
+                    </td>
 
                       <td style={styles.td}>
                         {booking.name}

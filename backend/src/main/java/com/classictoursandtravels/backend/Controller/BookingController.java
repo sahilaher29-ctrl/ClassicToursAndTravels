@@ -24,6 +24,11 @@ public class BookingController {
 
     booking.setStatus("Pending");
 
+    booking.setBookingReference(
+        "CTT-" + java.time.Year.now().getValue() + "-"
+        + String.format("%04d", bookingRepository.count() + 1)
+);
+
     return bookingRepository.save(booking);
 }
 

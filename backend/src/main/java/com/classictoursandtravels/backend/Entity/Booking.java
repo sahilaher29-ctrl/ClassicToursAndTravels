@@ -10,6 +10,8 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String bookingReference;
+
     private String name;
 
     private String mobile;
@@ -32,6 +34,14 @@ public class Booking {
     public Long getId() {
         return id;
     }
+
+    public String getBookingReference() {
+    return bookingReference;
+}
+
+    public void setBookingReference(String bookingReference) {
+    this.bookingReference = bookingReference;
+}
 
     public String getName() {
         return name;

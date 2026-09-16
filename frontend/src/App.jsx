@@ -716,6 +716,8 @@ I want to book a cab in Lonavala.`;
     // WhatsApp message
     let message = `🚕 *NEW CAB BOOKING*
 
+    🎫 *Booking Reference:* ${savedBooking.bookingReference}
+
 👤 Name: ${name}
 📱 Mobile: ${mobile}
 📅 Travel Date: ${date}
