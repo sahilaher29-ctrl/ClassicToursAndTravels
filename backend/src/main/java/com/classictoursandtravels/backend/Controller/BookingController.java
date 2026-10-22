@@ -10,6 +10,7 @@ import java.util.List;
 @RequestMapping("/api/bookings")
 @CrossOrigin(origins = {
     "http://localhost:5173",
+    "https://YOUR-FRONTEND-URL.onrender.com"
 })
 public class BookingController {
 
