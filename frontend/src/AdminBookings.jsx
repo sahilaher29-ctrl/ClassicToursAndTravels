@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 function AdminBookings() {
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const handleLogout = () => {
   localStorage.removeItem("adminLoggedIn");
   window.location.href = "/admin/login";
@@ -29,10 +30,9 @@ const [editForm, setEditForm] = useState({
       setLoading(true);
       setError("");
 
-      const response = await fetch(
-        "http://localhost:8081/api/bookings"
-      );
-
+const response = await fetch(
+  `${API_BASE_URL}/api/bookings`
+);
       if (!response.ok) {
         throw new Error("Failed to fetch bookings.");
       }
@@ -129,7 +129,7 @@ const handleEdit = (booking) => {
 const handleUpdate = async () => {
   try {
     const response = await fetch(
-      `http://localhost:8081/api/bookings/${editingBooking.id}`,
+      `${API_BASE_URL}/api/bookings/${editingBooking.id}`,
       {
         method: "PUT",
         headers: {
@@ -232,7 +232,7 @@ const handleDelete = async (id) => {
 
   try {
     const response = await fetch(
-      `http://localhost:8081/api/bookings/${id}`,
+      `${API_BASE_URL}/api/bookings/${id}`,
       {
         method: "DELETE"
       }
