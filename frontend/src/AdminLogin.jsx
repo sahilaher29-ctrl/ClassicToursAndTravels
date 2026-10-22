@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import lonavalaLake from "./assets/sightseeing/lonavala-lake.jpg";
-
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 function AdminLogin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -15,7 +15,7 @@ function AdminLogin() {
 
   try {
     const response = await fetch(
-      "http://localhost:8081/api/admin/login",
+  `${API_BASE_URL}/api/admin/login`,
       {
         method: "POST",
         headers: {
