@@ -1,0 +1,1240 @@
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f5f5f5;
+  color: #222;
+}
+
+button,
+a {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar {
+  width: 100%;
+  min-height: 76px;
+
+  background: #ffffff;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 30px;
+
+  border-bottom: 1px solid #e5e5e5;
+
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+
+/* LOGO */
+
+.logo-area {
+  display: flex;
+  align-items: center;
+
+  min-width: 270px;
+}
+
+.logo-icon {
+  width: 44px;
+  height: 44px;
+
+  border-radius: 50%;
+
+  background: #f84e57;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 22px;
+
+  margin-right: 10px;
+}
+
+.logo-area h1 {
+  font-size: 23px;
+  line-height: 22px;
+  font-weight: 800;
+}
+
+.logo-area span {
+  font-size: 11px;
+  color: #777;
+  letter-spacing: 1px;
+}
+
+
+/* NAV LINKS */
+
+.nav-links {
+  display: flex;
+  align-items: center;
+
+  flex: 1;
+}
+
+.nav-links a {
+  height: 76px;
+
+  padding: 0 22px;
+
+  display: flex;
+  align-items: center;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  border-left: 1px solid #eeeeee;
+
+  transition: 0.25s;
+}
+
+.nav-links a:hover {
+  color: #f84e57;
+  background: #fff7f7;
+}
+
+
+/* NAV BOOK BUTTON */
+
+.nav-book-btn {
+  border: none;
+
+  background: #f84e57;
+  color: white;
+
+  padding: 13px 22px;
+
+  border-radius: 6px;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  transition: 0.25s;
+}
+
+.nav-book-btn:hover {
+  background: #e83e47;
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero-section {
+  min-height: 560px;
+
+  background:
+    linear-gradient(
+      rgba(0, 0, 0, 0.48),
+      rgba(0, 0, 0, 0.58)
+    ),
+    linear-gradient(
+      135deg,
+      #79a46e,
+      #4c7751
+    );
+
+  background-size: cover;
+  background-position: center;
+
+  display: flex;
+  align-items: center;
+}
+
+.hero-overlay {
+  width: 100%;
+}
+
+.hero-content {
+  max-width: 1150px;
+
+  margin: auto;
+
+  padding: 90px 30px;
+
+  color: white;
+}
+
+.hero-small-title {
+  color: #ff6a72;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  letter-spacing: 2px;
+}
+
+.hero-content h2 {
+  font-size: 54px;
+
+  line-height: 1.1;
+
+  margin: 15px 0;
+
+  font-weight: 800;
+}
+
+.hero-content p {
+  max-width: 560px;
+
+  font-size: 18px;
+
+  line-height: 1.7;
+
+  color: #f2f2f2;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+
+  margin-top: 30px;
+}
+
+.primary-btn,
+.secondary-btn {
+  padding: 15px 25px;
+
+  border-radius: 6px;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.primary-btn {
+  background: #f84e57;
+  color: white;
+  border: none;
+}
+
+.secondary-btn {
+  background: white;
+  color: #222;
+}
+
+
+/* =========================================================
+   COMMON SECTION HEADING
+========================================================= */
+
+.section-heading {
+  text-align: center;
+
+  margin-bottom: 35px;
+}
+
+.section-heading p {
+  color: #f84e57;
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  letter-spacing: 2px;
+
+  margin-bottom: 7px;
+}
+
+.section-heading h2 {
+  font-size: 32px;
+
+  margin-bottom: 10px;
+
+  font-weight: 800;
+}
+
+.section-heading span {
+  color: #777;
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   CARS SECTION
+========================================================= */
+
+.cars-section {
+  padding: 75px 30px;
+
+  background: white;
+}
+
+.cars-grid {
+  max-width: 1100px;
+
+  margin: auto;
+
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 25px;
+}
+
+.car-card {
+  border: 1px solid #eeeeee;
+
+  border-radius: 12px;
+
+  overflow: hidden;
+
+  background: white;
+
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.06);
+
+  display: flex;
+}
+
+.car-emoji {
+  width: 42%;
+
+  min-height: 270px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f3f3f3,
+      #dedede
+    );
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: 100px;
+}
+
+.car-content {
+  padding: 27px;
+
+  flex: 1;
+}
+
+.car-tag {
+  display: inline-block;
+
+  color: #f84e57;
+
+  background: #fff0f1;
+
+  padding: 5px 9px;
+
+  border-radius: 4px;
+
+  font-size: 10px;
+
+  font-weight: 800;
+}
+
+.car-content h3 {
+  font-size: 23px;
+
+  margin: 12px 0 9px;
+}
+
+.car-content p {
+  color: #777;
+
+  line-height: 1.6;
+
+  font-size: 14px;
+}
+
+.car-details {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 7px;
+
+  margin: 18px 0;
+}
+
+.car-details span {
+  background: #f7f7f7;
+
+  padding: 7px 9px;
+
+  border-radius: 5px;
+
+  font-size: 11px;
+}
+
+.car-book-btn {
+  width: 100%;
+
+  padding: 12px;
+
+  border: none;
+
+  background: #f84e57;
+
+  color: white;
+
+  border-radius: 5px;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   TOUR PACKAGES
+========================================================= */
+
+.tour-packages-section {
+  padding: 65px 8px 75px;
+
+  background: #f3f3f3;
+}
+
+.tour-packages-grid {
+  display: grid;
+
+  grid-template-columns: repeat(6, minmax(200px, 1fr));
+
+  gap: 10px;
+
+  max-width: 1450px;
+
+  margin: auto;
+}
+
+.tour-package-card {
+  background: white;
+
+  border-radius: 10px;
+
+  padding: 12px 10px;
+
+  min-height: 515px;
+
+  position: relative;
+
+  box-shadow:
+    0 3px 12px rgba(0, 0, 0, 0.09);
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+.tour-package-card h3 {
+  font-size: 14px;
+
+  margin-bottom: 7px;
+
+  line-height: 1.3;
+}
+
+.package-description {
+  font-size: 10px;
+
+  line-height: 1.7;
+
+  min-height: 48px;
+
+  color: #333;
+}
+
+
+/* =========================================================
+   DAY BUTTONS
+========================================================= */
+
+.package-days {
+  display: flex;
+
+  gap: 5px;
+
+  margin: 10px 0 8px;
+}
+
+.package-days button {
+  border: none;
+
+  background: transparent;
+
+  padding: 5px 3px;
+
+  font-size: 10px;
+
+  color: #333;
+}
+
+.package-days button.active {
+  color: #f84e57;
+
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   CAR BUTTONS
+========================================================= */
+
+.package-cars {
+  display: flex;
+
+  gap: 7px;
+
+  margin-bottom: 10px;
+}
+
+.package-cars button {
+  background: white;
+
+  border: 1px solid #cccccc;
+
+  border-radius: 5px;
+
+  padding: 7px 11px;
+
+  font-size: 10px;
+
+  transition: 0.2s;
+}
+
+.package-cars button:hover {
+  border-color: #f84e57;
+}
+
+.package-cars button.active {
+  color: #f84e57;
+
+  border-color: #f84e57;
+
+  background: #fff8f8;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   PRICE / HOURS
+========================================================= */
+
+.package-info {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  border: 1px solid #f84e57;
+
+  margin-bottom: 12px;
+}
+
+.package-info span {
+  min-height: 25px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: 11px;
+
+  font-weight: 700;
+}
+
+.package-price {
+  border-right: 1px solid #f84e57;
+}
+
+.package-hours {
+  color: #333;
+}
+
+
+/* =========================================================
+   PLACES
+========================================================= */
+
+.package-places {
+  flex: 1;
+}
+
+.package-places h4,
+.premium-day h4 {
+  font-size: 13px;
+
+  margin-bottom: 8px;
+}
+
+.package-places ol,
+.premium-day ol {
+  padding-left: 20px;
+}
+
+.package-places li,
+.premium-day li {
+  font-size: 10px;
+
+  line-height: 1.9;
+
+  color: #333;
+}
+
+
+/* =========================================================
+   PREMIUM TWO DAYS
+========================================================= */
+
+.premium-days {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 10px;
+
+  flex: 1;
+
+  overflow: hidden;
+}
+
+.premium-day {
+  min-width: 0;
+}
+
+.premium-day ol {
+  padding-left: 17px;
+}
+
+.premium-day li {
+  font-size: 9px;
+
+  line-height: 1.85;
+}
+
+
+/* =========================================================
+   PACKAGE BOOK BUTTON
+========================================================= */
+
+.package-book-btn {
+  width: 100%;
+
+  border: none;
+
+  background: #f84e57;
+
+  color: white;
+
+  padding: 11px;
+
+  border-radius: 6px;
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  margin-top: 12px;
+
+  transition: 0.25s;
+}
+
+.package-book-btn:hover {
+  background: #e63f48;
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   PACKAGE CONTROLS
+========================================================= */
+
+.package-controls {
+  display: none;
+}
+
+
+/* =========================================================
+   SIGHTSEEING
+========================================================= */
+
+.sightseeing-section {
+  padding: 75px 30px;
+
+  background: white;
+}
+
+.sightseeing-grid {
+  max-width: 1200px;
+
+  margin: auto;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 22px;
+}
+
+.sightseeing-card {
+  background: white;
+
+  border: 1px solid #eeeeee;
+
+  border-radius: 10px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 5px 20px rgba(0, 0, 0, 0.06);
+}
+
+.sightseeing-image {
+  height: 175px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #d9eee0,
+      #9cc5a4
+    );
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.sightseeing-placeholder {
+  font-size: 70px;
+}
+
+.sightseeing-content {
+  padding: 20px;
+}
+
+.sightseeing-content h3 {
+  font-size: 19px;
+
+  margin-bottom: 9px;
+}
+
+.sightseeing-content p {
+  font-size: 13px;
+
+  line-height: 1.6;
+
+  color: #777;
+
+  min-height: 65px;
+}
+
+.sightseeing-book {
+  width: 100%;
+
+  border: none;
+
+  background: #f84e57;
+
+  color: white;
+
+  padding: 11px;
+
+  border-radius: 5px;
+
+  margin-top: 15px;
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   WHY CHOOSE US
+========================================================= */
+
+.why-section {
+  padding: 75px 30px;
+
+  background: #f5f5f5;
+}
+
+.why-grid {
+  max-width: 1100px;
+
+  margin: auto;
+
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 20px;
+}
+
+.why-card {
+  background: white;
+
+  text-align: center;
+
+  padding: 30px 20px;
+
+  border-radius: 10px;
+
+  box-shadow:
+    0 5px 18px rgba(0, 0, 0, 0.05);
+}
+
+.why-card > div {
+  font-size: 34px;
+
+  margin-bottom: 15px;
+}
+
+.why-card h3 {
+  font-size: 17px;
+
+  margin-bottom: 8px;
+}
+
+.why-card p {
+  color: #777;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contact-section {
+  background:
+    linear-gradient(
+      135deg,
+      #f84e57,
+      #dc3943
+    );
+
+  padding: 75px 30px;
+
+  text-align: center;
+
+  color: white;
+}
+
+.contact-content p {
+  font-size: 12px;
+
+  letter-spacing: 2px;
+
+  font-weight: 800;
+}
+
+.contact-content h2 {
+  font-size: 36px;
+
+  margin: 12px 0;
+}
+
+.contact-content span {
+  font-size: 15px;
+
+  color: #ffecee;
+}
+
+.contact-book-btn {
+  display: block;
+
+  margin: 25px auto 0;
+
+  padding: 14px 28px;
+
+  border: none;
+
+  border-radius: 6px;
+
+  background: white;
+
+  color: #e7434d;
+
+  font-weight: 800;
+
+  font-size: 14px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+  background: #181818;
+
+  color: white;
+
+  padding: 45px 35px 20px;
+}
+
+.footer-logo {
+  display: flex;
+
+  align-items: center;
+
+  max-width: 1100px;
+
+  margin: auto;
+}
+
+.footer-logo h3 {
+  font-size: 18px;
+}
+
+.footer-logo p {
+  font-size: 12px;
+
+  color: #aaa;
+
+  margin-top: 4px;
+}
+
+.footer-links {
+  max-width: 1100px;
+
+  margin: 30px auto;
+
+  display: flex;
+
+  gap: 25px;
+}
+
+.footer-links a {
+  color: #bbb;
+
+  font-size: 12px;
+}
+
+.footer-links a:hover {
+  color: white;
+}
+
+.footer-bottom {
+  border-top: 1px solid #333;
+
+  padding-top: 18px;
+
+  max-width: 1100px;
+
+  margin: auto;
+
+  color: #888;
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   FLOATING WHATSAPP
+========================================================= */
+
+.floating-whatsapp {
+  position: fixed;
+
+  right: 25px;
+  bottom: 25px;
+
+  width: 55px;
+  height: 55px;
+
+  border-radius: 50%;
+
+  border: 3px solid white;
+
+  background: #25d366;
+
+  color: white;
+
+  font-size: 25px;
+
+  box-shadow:
+    0 5px 20px rgba(0, 0, 0, 0.25);
+
+  z-index: 2000;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .navbar {
+    padding: 0 15px;
+  }
+
+  .logo-area {
+    min-width: 210px;
+  }
+
+  .nav-links a {
+    padding: 0 13px;
+    font-size: 10px;
+  }
+
+  .tour-packages-grid {
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 15px;
+
+    padding: 0 20px;
+  }
+
+  .tour-package-card {
+    min-height: 540px;
+  }
+
+  .sightseeing-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .why-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .navbar {
+    min-height: 65px;
+
+    padding: 10px 15px;
+
+    justify-content: space-between;
+  }
+
+  .logo-area {
+    min-width: auto;
+  }
+
+  .logo-area h1 {
+    font-size: 18px;
+  }
+
+  .logo-area span {
+    font-size: 8px;
+  }
+
+  .logo-icon {
+    width: 38px;
+    height: 38px;
+    font-size: 18px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .nav-book-btn {
+    padding: 10px 14px;
+
+    font-size: 11px;
+  }
+
+
+  /* HERO */
+
+  .hero-section {
+    min-height: 500px;
+  }
+
+  .hero-content {
+    padding: 70px 20px;
+  }
+
+  .hero-content h2 {
+    font-size: 38px;
+  }
+
+  .hero-content p {
+    font-size: 15px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+
+    width: 200px;
+  }
+
+
+  /* CARS */
+
+  .cars-section,
+  .sightseeing-section,
+  .why-section {
+    padding: 55px 18px;
+  }
+
+  .cars-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .car-card {
+    flex-direction: column;
+  }
+
+  .car-emoji {
+    width: 100%;
+    min-height: 190px;
+  }
+
+
+  /* PACKAGE */
+
+  .tour-packages-section {
+    padding: 55px 10px;
+  }
+
+  .tour-packages-grid {
+    grid-template-columns: 1fr;
+
+    padding: 0 10px;
+  }
+
+  .tour-package-card {
+    min-height: auto;
+
+    padding: 18px;
+
+    margin-bottom: 5px;
+  }
+
+  .package-description {
+    min-height: auto;
+  }
+
+  .package-places li,
+  .premium-day li {
+    font-size: 11px;
+  }
+
+
+  /* SIGHTSEEING */
+
+  .sightseeing-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  /* WHY */
+
+  .why-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+  /* CONTACT */
+
+  .contact-section {
+    padding: 60px 20px;
+  }
+
+  .contact-content h2 {
+    font-size: 29px;
+  }
+
+
+  /* FOOTER */
+
+  .footer {
+    padding: 35px 20px 20px;
+  }
+
+  .footer-links {
+    flex-wrap: wrap;
+
+    gap: 15px;
+  }
+
+
+  /* WHATSAPP */
+
+  .floating-whatsapp {
+    right: 18px;
+    bottom: 18px;
+
+    width: 50px;
+    height: 50px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 430px) {
+
+  .logo-area span {
+    display: none;
+  }
+
+  .nav-book-btn {
+    padding: 9px 11px;
+  }
+
+  .hero-content h2 {
+    font-size: 32px;
+  }
+
+  .section-heading h2 {
+    font-size: 27px;
+  }
+
+  .premium-days {
+    grid-template-columns: 1fr;
+  }
+
+  .package-info span {
+    font-size: 10px;
+  }
+
+}

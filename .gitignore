@@ -1,0 +1,20 @@
+# IDE
+.idea/
+*.iml
+
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+backend/target/
+frontend/node_modules/
+
+# Build output
+dist/
+build/
+
+# Logs
+*.log
