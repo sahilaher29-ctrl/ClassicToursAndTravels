@@ -1,68 +1,58 @@
-<<<<<<< HEAD
 import { useState } from "react";
 import { API_BASE_URL, ensureApiConfigured } from "./api";
 import lonavalaLake from "./assets/sightseeing/lonavala-lake.jpg";
-=======
-import React, { useState } from "react";
-import lonavalaLake from "./assets/sightseeing/lonavala-lake.jpg";
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
->>>>>>> c8dcd5d821bf9e98684fe792f1b682fc7a87fb44
+
 function AdminLogin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = async (event) => {
-  event.preventDefault();
+    event.preventDefault();
 
-  if (!username || !password) {
-    alert("Please enter username and password.");
-    return;
-  }
+    if (!username || !password) {
+      alert("Please enter username and password.");
+      return;
+    }
 
-  try {
-<<<<<<< HEAD
-    ensureApiConfigured();
-=======
->>>>>>> c8dcd5d821bf9e98684fe792f1b682fc7a87fb44
-    const response = await fetch(
-  `${API_BASE_URL}/api/admin/login`,
-      {
+    try {
+      ensureApiConfigured();
+
+      const response = await fetch(`${API_BASE_URL}/api/admin/login`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           username: username,
-          password: password
-        })
+          password: password,
+        }),
+      });
+
+      const result = await response.text();
+
+      if (result === "Login successful") {
+        alert("Login successful!");
+
+        localStorage.setItem("adminLoggedIn", "true");
+
+        window.location.href = "/admin/bookings";
+      } else {
+        alert("Invalid username or password.");
       }
-    );
+    } catch (error) {
+      console.error("Login error:", error);
 
-    const result = await response.text();
-
-    if (result === "Login successful") {
-  alert("Login successful!");
-
-  localStorage.setItem("adminLoggedIn", "true");
-
-  window.location.href = "/admin/bookings";
-} else {
-      alert("Invalid username or password.");
+      alert(
+        "Unable to connect to the server. Please make sure the backend is running."
+      );
     }
+  };
 
-  } catch (error) {
-    console.error("Login error:", error);
-
-    alert(
-      "Unable to connect to the server. Please make sure the backend is running."
-    );
-  }
-};
   return (
     <div
       style={{
         ...styles.page,
-        backgroundImage: `url(${lonavalaLake})`
+        backgroundImage: `url(${lonavalaLake})`,
       }}
     >
       {/* Dark overlay */}
@@ -73,9 +63,7 @@ function AdminLogin() {
         <div style={styles.brandIcon}>🚕</div>
 
         <div>
-          <h1 style={styles.brandTitle}>
-            Classic Tours And Travels
-          </h1>
+          <h1 style={styles.brandTitle}>Classic Tours And Travels</h1>
 
           <p style={styles.brandSubtitle}>
             Explore • Discover • Create Memories
@@ -85,9 +73,7 @@ function AdminLogin() {
 
       {/* Left Travel Message */}
       <div style={styles.leftContent}>
-        <div style={styles.carEmoji}>
-          🚙
-        </div>
+        <div style={styles.carEmoji}>🚙</div>
 
         <h2 style={styles.travelTitle}>
           Your Journey
@@ -112,20 +98,15 @@ function AdminLogin() {
 
       {/* Login Card */}
       <div style={styles.loginBox}>
-
         {/* Admin Icon */}
         <div style={styles.adminIcon}>
           👤
           <span style={styles.lockIcon}>🔒</span>
         </div>
 
-        <h2 style={styles.loginTitle}>
-          Admin Login
-        </h2>
+        <h2 style={styles.loginTitle}>Admin Login</h2>
 
-        <p style={styles.loginSubtitle}>
-          Classic Tours And Travels
-        </p>
+        <p style={styles.loginSubtitle}>Classic Tours And Travels</p>
 
         <div style={styles.line}></div>
 
@@ -136,52 +117,37 @@ function AdminLogin() {
         </p>
 
         <form onSubmit={handleLogin}>
-
           {/* Username */}
           <div style={styles.inputContainer}>
-            <span style={styles.inputIcon}>
-              👤
-            </span>
+            <span style={styles.inputIcon}>👤</span>
 
             <input
               type="text"
               placeholder="Username"
               value={username}
-              onChange={(event) =>
-                setUsername(event.target.value)
-              }
+              onChange={(event) => setUsername(event.target.value)}
               style={styles.input}
             />
           </div>
 
           {/* Password */}
           <div style={styles.inputContainer}>
-            <span style={styles.inputIcon}>
-              🔒
-            </span>
+            <span style={styles.inputIcon}>🔒</span>
 
             <input
               type="password"
               placeholder="Password"
               value={password}
-              onChange={(event) =>
-                setPassword(event.target.value)
-              }
+              onChange={(event) => setPassword(event.target.value)}
               style={styles.input}
             />
           </div>
 
           {/* Login Button */}
-          <button
-            type="submit"
-            style={styles.loginButton}
-          >
+          <button type="submit" style={styles.loginButton}>
             Login
-            <span style={styles.arrow}>
-              →
-            </span>
+            <span style={styles.arrow}>→</span>
           </button>
-
         </form>
 
         {/* Bottom Text */}
@@ -194,14 +160,11 @@ function AdminLogin() {
           <span>•</span>
           <span>Grow Together</span>
         </div>
-
       </div>
 
       {/* Bottom Right Message */}
       <div style={styles.rightMessage}>
-        <div style={styles.rightCar}>
-          🚗
-        </div>
+        <div style={styles.rightCar}>🚗</div>
 
         <h3>
           Better Roads
@@ -209,13 +172,11 @@ function AdminLogin() {
           Bigger Dreams
         </h3>
       </div>
-
     </div>
   );
 }
 
 const styles = {
-
   page: {
     minHeight: "100vh",
     width: "100%",
@@ -227,17 +188,16 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     overflow: "hidden",
-    fontFamily: "Arial, sans-serif"
+    fontFamily: "Arial, sans-serif",
   },
 
   overlay: {
     position: "absolute",
     inset: 0,
-    backgroundColor: "rgba(0, 0, 0, 0.42)"
+    backgroundColor: "rgba(0, 0, 0, 0.42)",
   },
 
   /* BRAND */
-
   brand: {
     position: "absolute",
     top: "35px",
@@ -246,66 +206,64 @@ const styles = {
     alignItems: "center",
     gap: "14px",
     color: "#ffffff",
-    zIndex: 2
+    zIndex: 2,
   },
 
   brandIcon: {
     fontSize: "42px",
     backgroundColor: "rgba(255,255,255,0.15)",
     padding: "10px",
-    borderRadius: "50%"
+    borderRadius: "50%",
   },
 
   brandTitle: {
     margin: 0,
     fontSize: "26px",
-    fontWeight: "700"
+    fontWeight: "700",
   },
 
   brandSubtitle: {
     margin: "5px 0 0",
     fontSize: "14px",
-    opacity: 0.9
+    opacity: 0.9,
   },
 
   /* LEFT CONTENT */
-
   leftContent: {
     position: "absolute",
     left: "55px",
     bottom: "70px",
     color: "#ffffff",
     zIndex: 2,
-    maxWidth: "350px"
+    maxWidth: "350px",
   },
 
   carEmoji: {
     fontSize: "60px",
-    marginBottom: "5px"
+    marginBottom: "5px",
   },
 
   travelTitle: {
     fontSize: "34px",
     lineHeight: "1.15",
     margin: "0 0 15px",
-    fontWeight: "700"
+    fontWeight: "700",
   },
 
   travelText: {
     fontSize: "17px",
     lineHeight: "1.6",
-    marginBottom: "20px"
+    marginBottom: "20px",
   },
 
   featureRow: {
     display: "flex",
     flexDirection: "column",
     gap: "9px",
-    fontSize: "14px"
+    fontSize: "14px",
   },
 
   /* LOGIN BOX */
-
   loginBox: {
     position: "relative",
     zIndex: 3,
@@ -314,7 +272,7 @@ const styles = {
     backgroundColor: "rgba(255,255,255,0.96)",
     borderRadius: "22px",
     boxShadow: "0 15px 45px rgba(0,0,0,0.35)",
-    textAlign: "center"
+    textAlign: "center",
   },
 
   adminIcon: {
@@ -328,7 +286,7 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     fontSize: "40px",
-    position: "relative"
+    position: "relative",
   },
 
   lockIcon: {
@@ -338,20 +296,20 @@ const styles = {
     fontSize: "22px",
     backgroundColor: "#ffffff",
     borderRadius: "50%",
-    padding: "3px"
+    padding: "3px",
   },
 
   loginTitle: {
     margin: 0,
     fontSize: "34px",
     color: "#124d7d",
-    fontWeight: "700"
+    fontWeight: "700",
   },
 
   loginSubtitle: {
     margin: "8px 0 15px",
     fontSize: "20px",
-    color: "#1b527f"
+    color: "#1b527f",
   },
 
   line: {
@@ -359,18 +317,17 @@ const styles = {
     height: "3px",
     backgroundColor: "#1475b8",
     margin: "0 auto 20px",
-    borderRadius: "10px"
+    borderRadius: "10px",
   },
 
   welcomeText: {
     color: "#65758b",
     fontSize: "14px",
     lineHeight: "1.6",
-    marginBottom: "22px"
+    marginBottom: "22px",
   },
 
   /* INPUTS */
-
   inputContainer: {
     display: "flex",
     alignItems: "center",
@@ -379,12 +336,12 @@ const styles = {
     marginBottom: "15px",
     backgroundColor: "#ffffff",
     height: "54px",
-    boxSizing: "border-box"
+    boxSizing: "border-box",
   },
 
   inputIcon: {
     width: "45px",
-    fontSize: "19px"
+    fontSize: "19px",
   },
 
   input: {
@@ -395,11 +352,10 @@ const styles = {
     fontSize: "16px",
     color: "#333",
     backgroundColor: "transparent",
-    paddingRight: "12px"
+    paddingRight: "12px",
   },
 
   /* BUTTON */
-
   loginButton: {
     width: "100%",
     height: "55px",
@@ -411,21 +367,20 @@ const styles = {
     fontWeight: "600",
     cursor: "pointer",
     marginTop: "5px",
-    boxShadow: "0 5px 15px rgba(8,104,173,0.3)"
+    boxShadow: "0 5px 15px rgba(8,104,173,0.3)",
   },
 
   arrow: {
     marginLeft: "12px",
-    fontSize: "23px"
+    fontSize: "23px",
   },
 
   /* BOTTOM */
-
   bottomLine: {
     height: "1px",
     backgroundColor: "#e4e7eb",
     marginTop: "28px",
-    marginBottom: "18px"
+    marginBottom: "18px",
   },
 
   bottomText: {
@@ -433,28 +388,27 @@ const styles = {
     justifyContent: "center",
     gap: "9px",
     fontSize: "12px",
-    color: "#124d7d"
+    color: "#124d7d",
   },
 
   /* RIGHT */
-
   rightMessage: {
     position: "absolute",
     right: "55px",
     bottom: "60px",
     color: "#ffffff",
     zIndex: 2,
-    textAlign: "center"
+    textAlign: "center",
   },
 
   rightCar: {
     fontSize: "75px",
-    marginBottom: "-5px"
+    marginBottom: "-5px",
   },
 
   rightMessageText: {
-    fontSize: "16px"
-  }
+    fontSize: "16px",
+  },
 };
 
 export default AdminLogin;
