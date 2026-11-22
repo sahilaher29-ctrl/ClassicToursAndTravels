@@ -1,7 +1,10 @@
 import { useState } from "react";
 import AdminBookings from "./AdminBookings";
 import AdminLogin from "./AdminLogin";
+<<<<<<< HEAD
 import { API_BASE_URL, ensureApiConfigured } from "./api";
+=======
+>>>>>>> c8dcd5d821bf9e98684fe792f1b682fc7a87fb44
 import "./index.css";
 
 import ertigaImage from "./assets/cars/ertiga.png";
@@ -695,9 +698,14 @@ I want to book a cab in Lonavala.`;
 
   try {
     // Save booking to Spring Boot + MySQL
+<<<<<<< HEAD
     ensureApiConfigured();
     const response = await fetch(
       `${API_BASE_URL}/api/bookings`,
+=======
+    const response = await fetch(
+      "http://localhost:8081/api/bookings",
+>>>>>>> c8dcd5d821bf9e98684fe792f1b682fc7a87fb44
       {
         method: "POST",
         headers: {
@@ -764,7 +772,11 @@ Please confirm availability.`;
     console.error("Booking error:", error);
 
     alert(
+<<<<<<< HEAD
       "Sorry, the booking could not be saved. Please try again later or contact us directly."
+=======
+      "Sorry, the booking could not be saved. Please make sure the backend server is running."
+>>>>>>> c8dcd5d821bf9e98684fe792f1b682fc7a87fb44
     );
   }
 };

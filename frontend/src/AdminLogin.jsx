@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 import { useState } from "react";
 import { API_BASE_URL, ensureApiConfigured } from "./api";
 import lonavalaLake from "./assets/sightseeing/lonavala-lake.jpg";
+=======
+import React, { useState } from "react";
+import lonavalaLake from "./assets/sightseeing/lonavala-lake.jpg";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+>>>>>>> c8dcd5d821bf9e98684fe792f1b682fc7a87fb44
 function AdminLogin() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -14,7 +20,10 @@ function AdminLogin() {
   }
 
   try {
+<<<<<<< HEAD
     ensureApiConfigured();
+=======
+>>>>>>> c8dcd5d821bf9e98684fe792f1b682fc7a87fb44
     const response = await fetch(
   `${API_BASE_URL}/api/admin/login`,
       {

@@ -9,9 +9,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/bookings")
 @CrossOrigin(origins = {
-    "http://localhost:5173",
-    "http://localhost:5176",
-    "https://classic-tours-frontend.onrender.com"
+        "http://localhost:5173",
+        "http://localhost:5176",
+        "https://classic-tours-frontend.onrender.com"
 })
 public class BookingController {
 
